@@ -1,25 +1,28 @@
 var starImg, fairyImg, bgImg;
 var fairy , fairyVoice;
 var star, starBody;
+var STAND,FELL;
 
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
+
+
 function preload()
 {
-	starImg = loadImage("images/star.png");
-	fairyImg = loadAnimation("images/fairyImage1.png","images/fairyImage2.png");
-	bgImg = loadImage("images/starNight.png");
-	fairyVoice = loadSound("sound/JoyMusic.mp3");
+	starImg = loadImage("star.png");
+	fairyImg = loadAnimation("fairyImage1.png","fairyImage2.png");
+	bgImg = loadImage("starNight.png");
+	
 
 }
 
 function setup() {
 	createCanvas(800, 750);
 
-	// fairyVoice.play();
+	
 
 	fairy = createSprite(130, 520);
 	fairy.addAnimation("fairyflying",fairyImg);  
@@ -41,12 +44,35 @@ function setup() {
 
 
 function draw() {
+
+	star.collide(fairy);
+	
   background(bgImg);
+  keyPressed();
+
+  star.collide(fairy);
 
   drawSprites();
+
+  fairy.setCollider("rectangle",450,20,200,10);
 
 }
 
 function keyPressed() {
-	//write code here
+	
+	if(keyDown("left")){
+		fairy.x = fairy.x - 5;
+	}
+
+	if(keyDown("right")){
+		fairy.x = fairy.x + 5;
+	}
+
+	if(keyDown("down")){
+	star.velocityY = 5;
+	
+	
+	}
 }
+
+
